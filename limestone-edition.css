@@ -135,11 +135,15 @@
   :root {
     --story-inline-inset: clamp(18px, 6vw, 38px);
     --display-size: clamp(36px, 9vw, 56px);
+    --mobile-copy-gap: clamp(22px, 4svh, 38px);
+    --story-description-gap: var(--mobile-copy-gap);
+    --story-note-gap: var(--mobile-copy-gap);
   }
 
   .coat-hero {
     --hero-image-height: clamp(220px, 40svh, 410px);
     min-height: 100svh;
+    align-items: stretch;
   }
 
   .coat-hero::before {
@@ -156,6 +160,9 @@
   }
 
   .pasture-hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-inline: var(--story-inline-inset);
     padding-block: calc(var(--hero-image-height) + 15px) 42px;
   }
@@ -164,8 +171,22 @@
   .pasture-hero-copy .pasture-hero-note { font-size: clamp(18px, 4.8vw, 24px); }
 
   .approach-sequence .meadow { display: grid; }
-  .approach-sequence .still-life { width: min(82%, 420px); }
-  .approach-sequence :is(.breeding, .cycle) { grid-template-columns: 1fr; }
+  .approach-sequence .scene.meadow .approach {
+    justify-items: stretch;
+    text-align: left;
+  }
+  .approach-sequence .still-life {
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 var(--mobile-copy-gap);
+  }
+  .approach-sequence .meadow h2 { text-wrap: wrap; }
+  .approach-sequence .meadow .scene-note { margin-top: var(--mobile-copy-gap); }
+  .approach-sequence :is(.breeding, .cycle) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mobile-copy-gap);
+  }
   .approach-sequence :is(.breeding, .cycle) .scene-image { grid-column: 1; }
   .approach-sequence .scene:is(.breeding, .cycle) .scene-copy {
     grid-column: 1;
@@ -177,6 +198,11 @@
   .products:not(.is-cinematic) .scene { min-height: 100svh; align-content: center; }
   .products:not(.is-cinematic) .product-visual img { aspect-ratio: 2; }
   .products:not(.is-cinematic) .product-scene--final .product-visual img { aspect-ratio: 1.75; }
+  .products:not(.is-cinematic) .product-scene--final {
+    align-content: stretch;
+    grid-template-rows: auto 1fr auto;
+  }
+  .origin-frame { height: min(38svh, 94vw); aspect-ratio: auto; }
   .products .shop-banner {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -189,7 +215,9 @@
     font-size: clamp(16px, 4.5vw, 22px);
     white-space: nowrap;
   }
-  .page-end { min-height: min(675px, 100svh); }
+  .page-end { min-height: 100svh; }
+  .farm-visit { gap: var(--mobile-copy-gap); }
+  .farm-visit :is(.farm-visit-note, address) { margin-top: 0; }
 }
 
 .origin-panel { display: contents; }
@@ -274,6 +302,12 @@
     padding: 24px var(--story-inline-inset);
   }
 
+  .products.is-mobile-cinematic .product-scene--final {
+    align-content: stretch;
+    grid-template-rows: auto 1fr auto;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
   .sequence.is-cinematic.is-mobile-cinematic .product-scene .scene-copy {
     width: 100%;
     margin: 0;
@@ -300,6 +334,7 @@
     padding: 0;
   }
 
+  .products.is-mobile-cinematic .product-scene--final .scene-copy { align-self: center; }
 }
 
 @media (min-width: 1200px) and (min-aspect-ratio: 21/9) {
