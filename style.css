@@ -1,0 +1,439 @@
+:root {
+  --approach-paper: #f4efe5;
+  --hero-overlap: clamp(64px, 11svh, 115px);
+  --display-size: clamp(42px, min(4.2vw, 7.2svh), 72px);
+  --display-spacing: -.038em;
+  --story-inline-inset: clamp(24px, 9vw, 156px);
+  --story-description-gap: clamp(18px, 1.6vw, 28px);
+  --story-note-gap: clamp(22px, 2.35vw, 36px);
+}
+
+@font-face {
+  font-family: Cormorant;
+  src: url(assets/cormorant-cyr.woff2) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/manrope-cyr.woff2) format("woff2");
+  font-display: swap;
+  unicode-range: U+0400-045F;
+}
+@font-face {
+  font-family: Manrope;
+  src: url(assets/manrope-lat.woff2) format("woff2");
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2000-206F;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: #38291e; background: #f4efe5; }
+h1, h2, p { margin: 0; }
+h1, h2 { font-family: Cormorant, Georgia, serif; font-weight: 400; line-height: 1.02; }
+p { font: 1rem/1.65 Manrope, Arial, sans-serif; }
+.meadow {
+  position: relative;
+  min-height: 78svh;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  background: #f4efe5;
+}
+.still-life {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+.still-life img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+.approach { margin-inline: clamp(24px, 9vw, 156px); max-width: min(39vw, 550px); padding-block: 100px; }
+h2 { font-size: clamp(48px, 6vw, 96px); text-wrap: balance; }
+.approach p { margin-top: 24px; }
+
+@media (max-width: 720px) {
+  .meadow { min-height: 0; display: flex; flex-direction: column; align-items: stretch; }
+  .still-life { position: static; aspect-ratio: 1.5; }
+  .still-life img { mask-image: linear-gradient(to top, transparent, #000 12%); display: block; }
+  .approach { max-width: 460px; margin: 0 24px; padding-block: 18px 72px; }
+}
+
+.scene { position: relative; min-height: 100svh; }
+.scene-copy { width: min(50%, 720px); padding: 72px clamp(32px, 8vw, 130px); }
+.scene-copy p { max-width: 40ch; margin-top: 24px; }
+.breeding, .cycle {
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--approach-paper);
+}
+.cycle { justify-items: end; }
+.scene-copy h2 { font-size: clamp(44px, 5vw, 80px); text-wrap: wrap; }
+.sequence h2 {
+  font-family: "Cormorant Garamond", Cormorant, Georgia, serif;
+  color: #2b2119;
+  line-height: .98;
+  letter-spacing: var(--display-spacing);
+}
+.title-line, .title-lead { display: block; }
+.title-lead {
+  margin-bottom: .32em;
+  font-size: .65em;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+.meadow h2 { font-size: var(--display-size); }
+.sequence .scene-note {
+  font: clamp(20px, 2vw, 29px)/1.28 "Bad Script", cursive;
+  color: #693d2b;
+}
+.sequence :is(.scene-description, .product-description) {
+  max-width: 40ch;
+  margin-top: var(--story-description-gap);
+  color: #38291e;
+  font: 400 clamp(19px, 1.55vw, 24px)/1.32 "Cormorant Garamond", Cormorant, Georgia, serif;
+}
+.sequence :is(.scene-description, .product-description) + .scene-note {
+  margin-top: var(--story-note-gap);
+}
+.breeding .scene-copy { padding-right: clamp(18px, 3vw, 48px); }
+.breeding h2 { font-size: var(--display-size); }
+.cycle h2 { font-size: var(--display-size); }
+.sequence:not(.products) h2 { text-wrap: balance; }
+.scene-image {
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  width: 72%;
+  height: 100%;
+  object-fit: cover;
+}
+.breeding .scene-image {
+  right: 0;
+  object-position: right bottom;
+  mask-image: linear-gradient(to right, transparent, #000 42%);
+}
+.cycle .scene-image {
+  left: 0;
+  width: 100%;
+  object-position: left center;
+}
+
+.sequence.is-cinematic { height: 290svh; }
+.is-cinematic .stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  isolation: isolate;
+  background: #f4efe5;
+}
+.is-cinematic .scene { position: absolute; inset: 0; opacity: 0; }
+.is-cinematic .scene:first-child { opacity: 1; }
+.is-cinematic .scene img { transform: scale(var(--scene-scale, 1)); }
+.is-cinematic :is(.approach, .scene-copy) {
+  opacity: var(--copy-opacity, 1);
+  transform: translateY(var(--copy-offset, 0px));
+}
+@media (max-width: 720px) {
+  .scene { min-height: 0; }
+  .cycle { justify-items: start; }
+  .scene-copy { width: min(100%, 470px); padding: 17px 24px 72px; }
+  .breeding .scene-copy { padding-right: 24px; }
+  :root { --display-size: clamp(48px, 11vw, 72px); }
+  .breeding .scene-image, .cycle .scene-image {
+    position: static;
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.5;
+    mask-image: linear-gradient(to top, transparent, #000 25%);
+  }
+}
+.origin {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  background: #252a22;
+  color: #f7f2eb;
+}
+.origin-frame {
+  position: relative;
+  height: clamp(300px, 58vw, 100svh);
+}
+.origin-art {
+  position: absolute;
+  inset: 0;
+  background: url(assets/origin-flight-rogovo-close.jpg) center / cover;
+  filter: contrast(1.09) saturate(1.06);
+  pointer-events: none;
+}
+@media (min-width: 900px) and (min-height: 660px) and (prefers-reduced-motion: no-preference) {
+  main > .sequence.is-cinematic {
+    position: relative;
+    z-index: 2;
+  }
+  .sequence.is-cinematic + .origin {
+    margin-top: -100svh;
+    scroll-margin-top: -100svh;
+  }
+  .sequence.is-cinematic + .origin .origin-frame {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+  }
+  .sequence.is-cinematic + .origin .origin-copy {
+    margin-top: 100svh;
+  }
+}
+.origin-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  padding: clamp(54px, 8svh, 96px) 24px;
+  background: #252a22;
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+.origin-copy h2 {
+  font-family: inherit;
+  font-size: var(--display-size);
+  letter-spacing: var(--display-spacing);
+}
+.origin-copy p {
+  max-width: min(48ch, 640px);
+  margin-top: var(--story-description-gap);
+  font: 400 clamp(21px, 1.9vw, 30px)/1.32 "Cormorant Garamond", Georgia, serif;
+}
+.origin-copy .origin-note {
+  max-width: 34ch;
+  margin-top: var(--story-note-gap);
+  font: clamp(20px, 1.65vw, 29px)/1.35 "Bad Script", cursive;
+  color: #f3e3ca;
+}
+.products { color: #38291e; background: var(--approach-paper); }
+.products.is-cinematic { height: 360svh; }
+.products .stage, .product-scene { background: var(--approach-paper); }
+.product-scene { display: grid; align-items: center; isolation: isolate; overflow: hidden; }
+.product-scene h2 { font-size: var(--display-size); }
+.sequence.is-cinematic .scene :is(.approach, .scene-copy) {
+  align-self: start;
+  width: min(36%, 570px);
+  max-width: none;
+  margin-inline: var(--story-inline-inset);
+  padding: clamp(105px, 23svh, 220px) 0 0;
+  transform: none;
+}
+.product-visual {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+}
+.product-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+.is-cinematic .product-visual img { grid-area: 1 / 1; }
+.is-cinematic .product-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, #f4efe5b3, #f4efe544 32%, transparent 49%);
+  pointer-events: none;
+}
+.is-cinematic .product-detail { opacity: var(--product-detail, 0); }
+.product-scene--final .product-visual img {
+  scale: .83;
+  transform-origin: 78% 47%;
+  mask-image:
+    linear-gradient(transparent, #000 7%, #000 92%, transparent),
+    linear-gradient(to right, transparent, #000 9%, #000 94%, transparent);
+  mask-composite: intersect;
+}
+@media (max-width: 899px), (max-height: 659px), (prefers-reduced-motion: reduce) {
+  .product-scene { min-height: auto; }
+  .product-visual { position: static; grid-template: none; }
+  .product-visual img { height: auto; aspect-ratio: 3 / 2; }
+  .product-scene .scene-copy { width: min(100%, 650px); padding-block: 12px 60px; }
+}
+
+.shop-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  padding: 12px clamp(24px, 8vw, 156px);
+}
+.is-cinematic .shop-banner { position: absolute; inset: auto 0 0; }
+.shop-banner-logo {
+  display: block;
+  width: clamp(144px, 16vw, 252px);
+  height: auto;
+}
+.farm-visit h2 {
+  font: 400 var(--display-size)/1.05 Cormorant, Georgia, serif;
+  letter-spacing: var(--display-spacing);
+}
+.shop-banner-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: 400 clamp(20px, 1.5vw, 26px)/1.15 "Cormorant Garamond", Cormorant, Georgia, serif;
+  text-decoration: none;
+  transition: border-color .2s ease;
+}
+.hero-contacts {
+  position: absolute;
+  top: clamp(20px, 4vw, 54px);
+  right: clamp(24px, 7vw, 128px);
+  font-family: Cormorant, Georgia, serif;
+  font-size: clamp(24px, 1.8vw, 34px);
+  border-bottom-color: #f7f2eb80;
+  text-shadow: 0 1px 5px #191a1970;
+}
+.shop-banner-action:enabled,
+a.shop-banner-action { cursor: pointer; }
+.shop-banner-action:hover,
+.shop-banner-action:focus-visible {
+  border-bottom-color: #a38b72;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shop-banner-action { transition: none; }
+}
+
+.page-end {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100svh;
+}
+.farm-visit {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  padding: clamp(64px, 13svh, 144px) clamp(24px, 9vw, 156px);
+  background: radial-gradient(ellipse at 50% 0%, #373d30, #222720 76%);
+  color: #f3f0e9;
+  text-align: center;
+}
+.farm-visit h2 { text-wrap: balance; }
+.farm-visit-note {
+  margin-top: 12px;
+  font: clamp(21px, 1.8vw, 29px)/1.35 "Bad Script", cursive;
+  color: #f3e3ca;
+}
+.farm-visit :is(address, .shop-banner-action) {
+  font: 400 16px/1.5 Manrope, Arial, sans-serif;
+}
+.farm-visit address {
+  margin-top: clamp(32px, 2.3vw, 40px);
+}
+.farm-visit .shop-banner-action {
+  padding-block: 0;
+  border-bottom: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .3em;
+}
+.site-footer {
+  padding: 26px clamp(24px, 9vw, 156px);
+  border-top: 1px solid #a38b7255;
+  background: #222720;
+  color: #d4d0c5;
+  font: 400 14px/1.5 Manrope, Arial, sans-serif;
+}
+.site-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 36px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.coat-hero {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  color: #f7f2eb;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+.coat-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 calc(-1 * var(--hero-overlap));
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 90% 0%, #171c16b3, transparent 42%),
+    linear-gradient(90deg, #1b20188f, #1b201833 40%, transparent 62%),
+    #252a22 url(assets/hero-pasture.jpg) right center / cover no-repeat;
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--hero-overlap)), transparent);
+}
+.coat-logo { position: absolute; top: clamp(20px, 4vw, 54px); left: clamp(24px, 7vw, 128px); width: clamp(124px, 13vw, 232px); }
+.pasture-hero-copy {
+  width: min(43%, 690px);
+  margin-inline: var(--story-inline-inset);
+  padding-block: 145px 72px;
+}
+.pasture-hero-copy h1 {
+  max-width: 25ch;
+  font-size: clamp(30px, 3.1vw, 56px);
+  line-height: 1.08;
+}
+.pasture-hero-copy p {
+  max-width: 28ch;
+  margin-top: 24px;
+  font: 400 clamp(24px, 2.25vw, 40px)/1.13 "Cormorant Garamond", Cormorant, Georgia, serif;
+}
+.pasture-hero-copy .pasture-hero-note {
+  max-width: 39ch;
+  margin-top: var(--story-note-gap);
+  font: clamp(20px, 1.65vw, 29px)/1.35 "Bad Script", cursive;
+  color: #f3e3ca;
+}
+.breeding { justify-items: start; background: var(--approach-paper); }
+.breeding .scene-copy {
+  width: min(39vw, 550px);
+  margin-inline: clamp(24px, 9vw, 156px);
+  padding-inline: 0;
+}
+.breeding .scene-image {
+  width: 100%;
+  object-position: right center;
+}
+@media (max-width: 720px) {
+  :root { --hero-overlap: min(8svh, 64px); }
+  .coat-hero { min-height: max(590px, 100svh); }
+  .coat-hero::before {
+    background-image:
+      radial-gradient(ellipse at 88% 0%, #171c16b3, transparent 42%),
+      linear-gradient(to top, #20241af5 12%, #20241a99 48%, transparent 77%),
+      url(assets/hero-pasture.jpg);
+    background-position: center, center, 79% center;
+  }
+  .coat-hero { align-items: end; }
+  .pasture-hero-copy { width: auto; margin-inline: 24px; padding-block: 42svh 52px; }
+  .breeding .scene-image { mask-image: linear-gradient(black 76%, transparent); }
+  .breeding .scene-copy { width: auto; max-width: 460px; margin-inline: 24px; padding-inline: 0; }
+}
