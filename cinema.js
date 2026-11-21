@@ -3,6 +3,7 @@ const sequences = [...document.querySelectorAll('.sequence')].map(sequence => {
   return { sequence, stage, scenes: [...stage.querySelectorAll('.scene')] };
 });
 const cinema = matchMedia('(min-width: 900px) and (min-height: 660px) and (prefers-reduced-motion: no-preference)');
+const mobileCinema = matchMedia('(max-width: 720px) and (min-height: 600px) and (prefers-reduced-motion: no-preference)');
 let frame = 0;
 
 function ease(value) {
@@ -12,14 +13,16 @@ function ease(value) {
 
 function paint() {
   frame = 0;
-  if (!cinema.matches) return;
+  if (!cinema.matches && !mobileCinema.matches) return;
   for (const sequence of sequences) paintSequence(sequence);
 }
 
 function paintSequence({ sequence, stage, scenes }) {
   const bounds = sequence.getBoundingClientRect();
   const travel = Math.max(1, bounds.height - stage.clientHeight);
-  const progress = Math.max(0, Math.min(1, -bounds.top / travel));
+  const stickyTop = mobileCinema.matches ? Math.min(0, window.innerHeight - stage.clientHeight) : 0;
+  if (mobileCinema.matches) stage.style.setProperty('--mobile-sticky-top', `${stickyTop}px`);
+  const progress = Math.max(0, Math.min(1, (stickyTop - bounds.top) / travel));
   const isProducts = sequence.classList.contains('products');
   const finalCue = isProducts ? 0.81 : 0.68;
   const active = progress < 0.30 ? 0 : progress < finalCue ? 1 : 2;
@@ -49,12 +52,15 @@ function paintSequence({ sequence, stage, scenes }) {
 }
 
 function schedulePaint() {
-  if (cinema.matches && !frame) frame = requestAnimationFrame(paint);
+  if ((cinema.matches || mobileCinema.matches) && !frame) frame = requestAnimationFrame(paint);
 }
 
 function updateMode() {
-  for (const { sequence } of sequences) sequence.classList.toggle('is-cinematic', cinema.matches);
-  if (cinema.matches) {
+  for (const { sequence } of sequences) {
+    sequence.classList.toggle('is-cinematic', cinema.matches || mobileCinema.matches);
+    sequence.classList.toggle('is-mobile-cinematic', mobileCinema.matches);
+  }
+  if (cinema.matches || mobileCinema.matches) {
     paint();
     return;
   }
@@ -67,6 +73,7 @@ function updateMode() {
 }
 
 cinema.addEventListener('change', updateMode);
+mobileCinema.addEventListener('change', updateMode);
 window.addEventListener('scroll', schedulePaint, { passive: true });
 window.addEventListener('resize', schedulePaint);
 updateMode();

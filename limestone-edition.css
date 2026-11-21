@@ -138,8 +138,8 @@
   }
 
   .coat-hero {
-    --hero-image-height: 50vw;
-    min-height: 0;
+    --hero-image-height: clamp(220px, 40svh, 410px);
+    min-height: 100svh;
   }
 
   .coat-hero::before {
@@ -147,8 +147,11 @@
       linear-gradient(to bottom, #181e16a8, transparent 27%),
       linear-gradient(to bottom, transparent 70%, #252a22),
       url(assets/hero-pasture-mobile.jpg);
-    background-size: 100% var(--hero-image-height), 100% var(--hero-image-height), 100% auto;
-    background-position: top center;
+    background-size:
+      100% var(--hero-image-height),
+      100% var(--hero-image-height),
+      max(100%, calc(2 * var(--hero-image-height))) auto;
+    background-position: top center, top center, 78% top;
     background-repeat: no-repeat;
   }
 
@@ -170,12 +173,28 @@
   }
 
   .products .scene-copy { padding-inline: var(--story-inline-inset); }
+  .approach-sequence:not(.is-cinematic) .scene,
+  .products:not(.is-cinematic) .scene { min-height: 100svh; align-content: center; }
   .products:not(.is-cinematic) .product-visual img { aspect-ratio: 2; }
   .products:not(.is-cinematic) .product-scene--final .product-visual img { aspect-ratio: 1.75; }
+  .products .shop-banner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+  .products .shop-banner-logo { width: clamp(68px, 23vw, 100px); }
+  .products .shop-banner-action {
+    justify-self: end;
+    gap: 6px;
+    font-size: clamp(16px, 4.5vw, 22px);
+    white-space: nowrap;
+  }
   .page-end { min-height: min(675px, 100svh); }
 }
 
-@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+.origin-panel { display: contents; }
+
+@media (max-width: 720px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
   .approach-sequence {
     position: relative;
     z-index: 2;
@@ -183,19 +202,104 @@
   }
 
   .approach-sequence + .origin {
-    --mobile-river-height: calc(100vw * 941 / 1672);
-    margin-top: calc(-1 * var(--mobile-river-height));
+    margin-top: -100svh;
   }
 
-  .approach-sequence + .origin .origin-frame {
+  .origin-panel {
+    display: grid;
     position: sticky;
     top: 0;
-    height: var(--mobile-river-height);
+    width: 100%;
+    min-width: 0;
+    min-height: 100svh;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .origin-panel .origin-frame {
+    width: 100%;
+    min-width: 0;
+    align-self: start;
+  }
+
+  .approach-sequence + .origin::after {
+    content: "";
+    display: block;
+    height: 132svh;
   }
 
   .approach-sequence + .origin .origin-copy {
-    margin-top: var(--mobile-river-height);
+    align-content: center;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(22px, 4svh, 48px) var(--story-inline-inset);
   }
+}
+
+@media (max-width: 720px) {
+  .sequence.is-cinematic.is-mobile-cinematic {
+    height: auto;
+  }
+
+  /* Keep the scroll distance inside the sticky stage's containing block. */
+  .sequence.is-mobile-cinematic::after {
+    content: "";
+    display: block;
+    height: 155svh;
+  }
+
+  .products.is-mobile-cinematic::after { height: 200svh; }
+
+  .is-mobile-cinematic .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    top: var(--mobile-sticky-top, 0px);
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .is-mobile-cinematic .stage > .scene {
+    position: relative;
+    inset: auto;
+    grid-area: 1 / 1;
+    min-width: 0;
+    align-content: center;
+  }
+
+  .approach-sequence.is-mobile-cinematic .scene {
+    padding-block: clamp(24px, 5svh, 48px);
+  }
+
+  .products.is-mobile-cinematic .scene {
+    padding: 24px var(--story-inline-inset);
+  }
+
+  .sequence.is-cinematic.is-mobile-cinematic .product-scene .scene-copy {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .products.is-cinematic.is-mobile-cinematic .product-visual {
+    position: relative;
+    inset: auto;
+    height: clamp(140px, 29svh, 240px);
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    margin-bottom: 18px;
+  }
+
+  .products.is-mobile-cinematic .product-visual img {
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .products.is-mobile-cinematic .shop-banner {
+    position: static;
+    margin-top: 20px;
+    padding: 0;
+  }
+
 }
 
 @media (min-width: 1200px) and (min-aspect-ratio: 21/9) {
