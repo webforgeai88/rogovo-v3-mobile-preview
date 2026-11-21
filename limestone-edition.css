@@ -175,6 +175,29 @@
   .page-end { min-height: min(675px, 100svh); }
 }
 
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+  .approach-sequence {
+    position: relative;
+    z-index: 2;
+    background: var(--approach-paper);
+  }
+
+  .approach-sequence + .origin {
+    --mobile-river-height: calc(100vw * 941 / 1672);
+    margin-top: calc(-1 * var(--mobile-river-height));
+  }
+
+  .approach-sequence + .origin .origin-frame {
+    position: sticky;
+    top: 0;
+    height: var(--mobile-river-height);
+  }
+
+  .approach-sequence + .origin .origin-copy {
+    margin-top: var(--mobile-river-height);
+  }
+}
+
 @media (min-width: 1200px) and (min-aspect-ratio: 21/9) {
   :root {
     --story-inline-inset: max(clamp(80px, 8vw, 156px), calc((100vw - 205svh) / 2 + 48px));
