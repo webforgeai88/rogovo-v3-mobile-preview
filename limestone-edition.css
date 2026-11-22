@@ -26,6 +26,7 @@
 .approach-sequence .still-life img {
   display: block;
   mask-image: none;
+  filter: brightness(.96);
 }
 
 .approach-sequence .meadow .scene-note { margin-top: 14px; }
@@ -52,6 +53,7 @@
 .approach-sequence .breeding .scene-image {
   grid-column: 2;
   object-position: right center;
+  filter: brightness(.95);
 }
 
 .approach-sequence .cycle .scene-image {
