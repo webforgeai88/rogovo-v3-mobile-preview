@@ -123,7 +123,7 @@
   position: absolute;
   inset: 0;
   background: inherit;
-  filter: contrast(1.16) brightness(.94) saturate(.94);
+  filter: contrast(1.16) brightness(.94) saturate(.78);
   mask-image: radial-gradient(ellipse 70% 85% at 0% 28%, #000 20%, transparent 82%);
 }
 
@@ -150,9 +150,9 @@
 
   .coat-hero::before {
     background-image:
-      linear-gradient(to bottom, #181e16a8, transparent 27%),
+      linear-gradient(to bottom, #181e1680, transparent 27%),
       linear-gradient(to bottom, transparent 70%, var(--graphite-panel)),
-      url(assets/hero-pasture-mobile.jpg);
+      url(assets/hero-pasture-mobile.webp);
     background-size:
       100% var(--hero-image-height),
       100% var(--hero-image-height),
@@ -367,12 +367,13 @@
     inset: 0 0 0 auto;
     width: min(100%, 200svh);
     background:
-      radial-gradient(ellipse at 95% 0%, #171c1690, transparent 40%),
+      radial-gradient(ellipse at 95% 0%, #171c1670, transparent 40%),
       url(assets/hero-pasture.jpg) right center / contain no-repeat;
     mask-image:
       linear-gradient(to right, transparent, #000 27%),
       linear-gradient(to bottom, #000 93%, transparent);
     mask-composite: intersect;
+    filter: brightness(1.1);
     pointer-events: none;
   }
 

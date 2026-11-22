@@ -170,8 +170,8 @@ h2 { font-size: clamp(48px, 6vw, 96px); text-wrap: balance; }
 .origin-art {
   position: absolute;
   inset: 0;
-  background: url(assets/origin-flight-rogovo-close.jpg) center / cover;
-  filter: contrast(1.09) saturate(1.06);
+  background: url(assets/origin-flight-rogovo-close.webp) center / cover;
+  filter: contrast(1.09) saturate(.9);
   pointer-events: none;
 }
 @media (min-width: 900px) and (min-height: 660px) and (prefers-reduced-motion: no-preference) {
@@ -389,10 +389,13 @@ a.shop-banner-action { cursor: pointer; }
   inset: 0 0 calc(-1 * var(--hero-overlap));
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 90% 0%, #171c16b3, transparent 42%),
-    linear-gradient(90deg, #1b20188f, #1b201833 40%, transparent 62%),
+    radial-gradient(ellipse at 90% 0%, #171c168c, transparent 42%),
+    linear-gradient(90deg, #1b201899, #1b20183d 40%, transparent 62%),
     #252a22 url(assets/hero-pasture.jpg) right center / cover no-repeat;
   mask-image: linear-gradient(to bottom, #000 calc(100% - var(--hero-overlap)), transparent);
+}
+@media (width > 720px) {
+  .coat-hero::before { filter: brightness(1.1); }
 }
 .coat-logo { position: absolute; top: clamp(20px, 4vw, 54px); left: clamp(24px, 7vw, 128px); width: clamp(124px, 13vw, 232px); }
 .coat-hero .coat-logo { filter: brightness(0) invert(1); }

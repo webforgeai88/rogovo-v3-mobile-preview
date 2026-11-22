@@ -5,9 +5,11 @@
   <meta name="robots" content="noindex, nofollow" data-publish>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Рогово — вариант 2 · белый и графит</title>
-  <link rel="stylesheet" href="style.css?v=graphite-04">
+  <link rel="preload" as="image" href="assets/hero-pasture-mobile.webp" media="(max-width: 720px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero-pasture.jpg" media="(width > 720px)" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=graphite-09">
   <link rel="stylesheet" href="hero-v4.css">
-  <link rel="stylesheet" href="limestone-edition.css?v=graphite-06">
+  <link rel="stylesheet" href="limestone-edition.css?v=graphite-09">
   <script src="cinema.js" defer></script>
 </head>
 <body>
@@ -26,14 +28,14 @@
       <div class="approach">
         <h2 id="approach">Хорошее мясо начинается с травы</h2>
         <div class="still-life">
-          <img src="assets/meadow-graphite-limestone.png" alt="Свежие травы и сено на цельной светлой каменной поверхности">
+          <img src="assets/meadow-graphite-limestone.webp" alt="Свежие травы и сено на цельной светлой каменной поверхности">
         </div>
         <p class="scene-description">Всё начинается с того, что даёт сама природа. Чистые луговые травы становятся основой естественного питания животных.</p>
         <p class="scene-note">Чистые луга. Верховья Волги.</p>
       </div>
     </article>
     <article class="scene breeding" aria-labelledby="breeding">
-      <img class="scene-image" src="assets/breeds-graphite-limestone.png" alt="Коричневая калмыцкая корова впереди, чёрная абердин-ангусская позади">
+      <img class="scene-image" src="assets/breeds-graphite-limestone.webp" alt="Коричневая калмыцкая корова впереди, чёрная абердин-ангусская позади">
       <div class="scene-copy">
         <h2 id="breeding">Чем отличается узнаваемый флорентийский стейк?</h2>
         <p class="scene-description">Во флорентийском стейке на первом плане вкус самого мяса. У нашей говядины свой характер, который ей дают две породы — калмыцкая и абердин-ангусская.</p>
@@ -41,7 +43,7 @@
       </div>
     </article>
     <article class="scene cycle" aria-labelledby="cycle">
-      <img class="scene-image" src="assets/stamp-graphite-limestone.png" alt="Тёмный штемпель и коричневый оттиск логотипа «Рогово» на белой бумаге">
+      <img class="scene-image" src="assets/stamp-graphite-limestone.webp" alt="Тёмный штемпель и коричневый оттиск логотипа «Рогово» на белой бумаге">
       <div class="scene-copy">
         <h2 id="cycle">От пастбища до стола</h2>
         <p class="scene-description">Каждый этап находится под нашим контролем — от выращивания животных до готового продукта. Никакой химии, ГМО и гормонов. Только ответственность за то, что мы создаём.</p>
@@ -66,7 +68,7 @@
     <div class="sequence products">
       <div class="stage">
         <article class="scene product-scene" aria-labelledby="product-beef">
-          <div class="product-visual"><img src="assets/product-flat-beef.png" alt="Два постных среза говядины"></div>
+          <div class="product-visual"><img src="assets/product-flat-beef.webp" fetchpriority="low" alt="Два постных среза говядины"></div>
           <div class="scene-copy">
             <h2 id="product-beef">Мясо</h2>
             <p class="product-description">270 дней травяного откорма, свободный выпас и рост без ускорителей. Так природа формирует характер мяса — его выразительный вкус и благородную текстуру.</p>
@@ -75,8 +77,8 @@
         </article>
         <article class="scene product-scene" aria-labelledby="product-offal">
           <div class="product-visual">
-            <img src="assets/product-flat-liver.png" alt="Говяжья печень">
-            <img class="product-detail" src="assets/product-flat-pate.png" alt="Срез говяжьего паштета">
+            <img src="assets/product-flat-liver.webp" fetchpriority="low" alt="Говяжья печень">
+            <img class="product-detail" src="assets/product-flat-pate.webp" fetchpriority="low" alt="Срез говяжьего паштета">
           </div>
           <div class="scene-copy">
             <h2 id="product-offal">Субпродукты</h2>
@@ -85,7 +87,7 @@
           </div>
         </article>
         <article class="scene product-scene product-scene--final" aria-labelledby="product-pelmeni">
-          <div class="product-visual"><img src="assets/product-flat-pelmeni-amber.png" alt="Два целых пельменя и один в разрезе в светлом говяжьем бульоне"></div>
+          <div class="product-visual"><img src="assets/product-flat-pelmeni-amber.webp" fetchpriority="low" alt="Два целых пельменя и один в разрезе в светлом говяжьем бульоне"></div>
           <div class="scene-copy">
             <h2 id="product-pelmeni"><span class="title-line">Основа классической</span> <span class="title-line">итальянской кухни</span></h2>
             <p class="product-description">Нежные пельмени в прозрачном говяжьем бульоне. Достаточно соли и перца, чтобы раскрыть всю глубину вкуса говядины.</p>
