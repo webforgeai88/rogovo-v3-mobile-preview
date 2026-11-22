@@ -1,0 +1,403 @@
+.approach-sequence :is(.meadow, .breeding, .cycle) {
+  background: var(--approach-paper);
+  padding: clamp(36px, 7svh, 86px) var(--story-inline-inset);
+}
+
+.approach-sequence .scene.meadow .approach {
+  display: grid;
+  align-self: center;
+  justify-items: center;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.approach-sequence .still-life {
+  position: relative;
+  z-index: auto;
+  width: min(100%, 490px);
+  aspect-ratio: 2;
+  margin-top: clamp(22px, 4svh, 44px);
+  overflow: hidden;
+}
+
+.approach-sequence .still-life img {
+  display: block;
+  mask-image: none;
+  filter: brightness(.98);
+}
+
+.approach-sequence .meadow .scene-note { margin-top: 14px; }
+
+.approach-sequence :is(.breeding, .cycle) {
+  gap: clamp(28px, 6vw, 102px);
+  justify-items: stretch;
+}
+
+.approach-sequence .breeding { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr); }
+.approach-sequence .cycle { grid-template-columns: minmax(0, 5fr) minmax(0, 4fr); }
+
+.approach-sequence :is(.breeding, .cycle) .scene-image {
+  position: relative;
+  z-index: auto;
+  inset: auto;
+  grid-row: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  mask-image: none;
+}
+
+.approach-sequence .breeding .scene-image {
+  grid-column: 2;
+  object-position: right center;
+  filter: brightness(.98);
+}
+
+.approach-sequence .cycle .scene-image {
+  grid-column: 1;
+  object-position: left center;
+  filter: brightness(1.01);
+}
+
+.approach-sequence .scene:is(.breeding, .cycle) .scene-copy {
+  grid-row: 1;
+  align-self: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0;
+  padding: 0;
+}
+
+.approach-sequence .breeding .scene-copy { grid-column: 1; }
+.approach-sequence .cycle .scene-copy { grid-column: 2; }
+
+.approach-sequence :is(.breeding, .cycle) h2 {
+  font-size: clamp(36px, min(4vw, 6.7svh), 66px);
+}
+
+.products.is-cinematic .product-visual {
+  inset: 10% 1.5% 12% 46.5%;
+  place-items: center;
+}
+
+.products .product-visual img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.products [aria-labelledby="product-offal"] .product-visual img { scale: .93; }
+
+.products .product-scene--final .product-visual img {
+  width: 91%;
+  scale: none;
+  transform-origin: center;
+  mask: none;
+  filter: saturate(.85);
+}
+
+.products:not(.is-cinematic) .product-visual img {
+  width: 88%;
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.products:not(.is-cinematic) .product-visual {
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0;
+}
+
+.products:not(.is-cinematic) [aria-labelledby="product-offal"] .product-visual img {
+  aspect-ratio: 2;
+}
+
+.products.is-cinematic .product-visual::after { content: none; }
+.products.is-cinematic [aria-labelledby="product-offal"] .product-visual img:first-child {
+  opacity: var(--product-primary, 1);
+}
+
+.approach-sequence + .origin .origin-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  filter: contrast(1.16) brightness(.94) saturate(.94);
+  mask-image: radial-gradient(ellipse 70% 85% at 0% 28%, #000 20%, transparent 82%);
+}
+
+@media (max-width: 899px), (max-height: 659px), (prefers-reduced-motion: reduce) {
+  .approach-sequence .scene { min-height: 0; }
+  .approach-sequence .scene + .scene { padding-top: 0; }
+  .origin-frame { height: auto; aspect-ratio: 1672 / 941; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --story-inline-inset: clamp(18px, 6vw, 38px);
+    --display-size: clamp(36px, 9vw, 56px);
+    --mobile-copy-gap: clamp(22px, 4svh, 38px);
+    --story-description-gap: var(--mobile-copy-gap);
+    --story-note-gap: var(--mobile-copy-gap);
+  }
+
+  .coat-hero {
+    --hero-image-height: clamp(220px, 40svh, 410px);
+    min-height: 100svh;
+    align-items: stretch;
+  }
+
+  .coat-hero::before {
+    background-image:
+      linear-gradient(to bottom, #181e16a8, transparent 27%),
+      linear-gradient(to bottom, transparent 70%, var(--graphite-panel)),
+      url(assets/hero-pasture-mobile.jpg);
+    background-size:
+      100% var(--hero-image-height),
+      100% var(--hero-image-height),
+      max(100%, calc(2 * var(--hero-image-height))) auto;
+    background-position: top center, top center, 78% top;
+    background-repeat: no-repeat;
+  }
+
+  .pasture-hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-inline: var(--story-inline-inset);
+    padding-block: calc(var(--hero-image-height) + 15px) 42px;
+  }
+
+  .pasture-hero-copy h1 { font-size: clamp(29px, 7.6vw, 46px); }
+  .pasture-hero-copy .pasture-hero-note { font-size: clamp(18px, 4.8vw, 24px); }
+  .coat-hero .hero-contacts {
+    min-height: 44px;
+    font-size: clamp(17px, 4.6vw, 21px);
+  }
+
+  .approach-sequence .meadow { display: grid; }
+  .approach-sequence .scene.meadow .approach {
+    justify-items: stretch;
+    text-align: left;
+  }
+  .approach-sequence .still-life {
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 var(--mobile-copy-gap);
+  }
+  .approach-sequence .meadow h2 { text-wrap: wrap; }
+  .approach-sequence .meadow .scene-note { margin-top: var(--mobile-copy-gap); }
+  .approach-sequence :is(.breeding, .cycle) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--mobile-copy-gap);
+  }
+  .approach-sequence :is(.breeding, .cycle) .scene-image { grid-column: 1; }
+  .approach-sequence .scene:is(.breeding, .cycle) .scene-copy {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .products .scene-copy { padding-inline: var(--story-inline-inset); }
+  .approach-sequence:not(.is-cinematic) .scene,
+  .products:not(.is-cinematic) .scene { min-height: 100svh; align-content: center; }
+  .products:not(.is-cinematic) .product-visual img { aspect-ratio: 2; }
+  .products:not(.is-cinematic) .product-scene--final .product-visual img { aspect-ratio: 1.75; }
+  .products:not(.is-cinematic) .product-scene--final {
+    align-content: stretch;
+    grid-template-rows: auto 1fr auto;
+  }
+  .origin-frame { height: min(38svh, 94vw); aspect-ratio: auto; }
+  .products .shop-banner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+  .products .shop-banner-logo { width: clamp(68px, 23vw, 100px); }
+  .products .shop-banner-action {
+    justify-self: end;
+    gap: 6px;
+    font-size: clamp(16px, 4.5vw, 22px);
+    white-space: nowrap;
+  }
+  .page-end { min-height: 100svh; }
+  .farm-visit {
+    min-height: 100dvh;
+    gap: var(--mobile-copy-gap);
+  }
+  .farm-visit :is(.farm-visit-note, address) { margin-top: 0; }
+}
+
+.origin-panel { display: contents; }
+
+@media (max-width: 720px) and (min-height: 600px) and (prefers-reduced-motion: no-preference) {
+  .approach-sequence {
+    position: relative;
+    z-index: 2;
+    background: var(--approach-paper);
+  }
+
+  .approach-sequence + .origin {
+    margin-top: -100svh;
+  }
+
+  .origin-panel {
+    display: grid;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    min-width: 0;
+    min-height: 100svh;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .origin-panel .origin-frame {
+    width: 100%;
+    min-width: 0;
+    align-self: start;
+  }
+
+  .approach-sequence + .origin::after {
+    content: "";
+    display: block;
+    height: 132svh;
+  }
+
+  .approach-sequence + .origin .origin-copy {
+    align-content: center;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    padding: clamp(22px, 4svh, 48px) var(--story-inline-inset);
+  }
+}
+
+@media (max-width: 720px) {
+  .sequence.is-cinematic.is-mobile-cinematic {
+    height: auto;
+  }
+
+  /* Keep the scroll distance inside the sticky stage's containing block. */
+  .sequence.is-mobile-cinematic::after {
+    content: "";
+    display: block;
+    height: 155svh;
+  }
+
+  .products.is-mobile-cinematic::after { height: 200svh; }
+
+  .is-mobile-cinematic .stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    top: var(--mobile-sticky-top, 0px);
+    height: auto;
+    min-height: 100svh;
+  }
+
+  .is-mobile-cinematic .stage > .scene {
+    position: relative;
+    inset: auto;
+    grid-area: 1 / 1;
+    min-width: 0;
+    align-content: center;
+  }
+
+  .approach-sequence.is-mobile-cinematic .scene {
+    padding-block: clamp(24px, 5svh, 48px);
+  }
+
+  .products.is-mobile-cinematic .scene {
+    padding: 24px var(--story-inline-inset);
+  }
+
+  .products.is-mobile-cinematic .product-scene--final {
+    align-content: stretch;
+    grid-template-rows: auto 1fr auto;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+
+  .sequence.is-cinematic.is-mobile-cinematic .product-scene .scene-copy {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .products.is-cinematic.is-mobile-cinematic .product-visual {
+    position: relative;
+    inset: auto;
+    height: clamp(140px, 29svh, 240px);
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    margin-bottom: 18px;
+  }
+
+  .products.is-mobile-cinematic .product-visual img {
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .products.is-mobile-cinematic .shop-banner {
+    position: static;
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  .products.is-mobile-cinematic .product-scene--final .scene-copy { align-self: center; }
+}
+
+@media (min-width: 1200px) and (min-aspect-ratio: 21/9) {
+  :root {
+    --story-inline-inset: max(clamp(80px, 8vw, 156px), calc((100vw - 205svh) / 2 + 48px));
+  }
+
+  .origin-art { overflow: hidden; }
+  .origin-frame { max-height: 100svh; }
+
+  .coat-hero::before {
+    background:
+      linear-gradient(90deg, #252a22 5%, #252a2290 58%, #252a2255),
+      #252a22 url(assets/hero-pasture.jpg) center / cover no-repeat;
+  }
+
+  .coat-hero::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 auto;
+    width: min(100%, 200svh);
+    background:
+      radial-gradient(ellipse at 95% 0%, #171c1690, transparent 40%),
+      url(assets/hero-pasture.jpg) right center / contain no-repeat;
+    mask-image:
+      linear-gradient(to right, transparent, #000 27%),
+      linear-gradient(to bottom, #000 93%, transparent);
+    mask-composite: intersect;
+    pointer-events: none;
+  }
+
+  .origin-art {
+    background-size: cover;
+  }
+
+  .origin-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    filter: blur(26px) brightness(.76);
+  }
+
+  .approach-sequence + .origin .origin-art::after {
+    width: min(100%, calc(100svh * 1672 / 941));
+    margin-inline: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: none;
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .products.is-cinematic .product-visual {
+    inset-inline: 48% max(3%, calc((100vw - 205svh) / 2));
+  }
+}
